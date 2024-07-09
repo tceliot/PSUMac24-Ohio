@@ -1,12 +1,5 @@
 # Monolith
 
-resource "zentral_mdm_artifact" "mscp-firewall" {
-  name      = "mSCP - firewall"
-  type      = "Profile"
-  channel   = "Device"
-  platforms = ["macOS"]
-}
-
 resource "zentral_mdm_artifact" "monolith-default-enrollment" {
   name      = "Monolith - Default enrollment"
   type      = "Profile"
@@ -157,6 +150,20 @@ resource "zentral_mdm_artifact" "system-logging" {
 resource "zentral_mdm_profile" "system-logging-1" {
   artifact_id = zentral_mdm_artifact.system-logging.id
   source      = filebase64("${path.module}/mobileconfigs/system.logging.v1.mobileconfig")
+  macos       = true
+  version     = 1
+}
+
+resource "zentral_mdm_artifact" "mscp-firewall" {
+  name      = "mSCP - firewall"
+  type      = "Profile"
+  channel   = "Device"
+  platforms = ["macOS"]
+}
+
+resource "zentral_mdm_profile" "mscp-firewall-1" {
+  artifact_id = zentral_mdm_artifact.mscp-firewall.id
+  source      = filebase64("${path.module}/mobileconfigs/com.apple.security.firewall.mobileconfig")
   macos       = true
   version     = 1
 }
