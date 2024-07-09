@@ -1,5 +1,12 @@
 # Monolith
 
+resource "zentral_mdm_artifact" "mscp-firewall" {
+  name      = "mSCP - firewall"
+  type      = "Profile"
+  channel   = "Device"
+  platforms = ["macOS"]
+}
+
 resource "zentral_mdm_artifact" "monolith-default-enrollment" {
   name      = "Monolith - Default enrollment"
   type      = "Profile"
